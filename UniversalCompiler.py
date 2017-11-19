@@ -30,6 +30,19 @@ class FileManipulator():
             outputFile.write(output)
         outputFile.close()
 
+    def processParameters(self, statement, row, outputFile, option = ""):
+        parameter = ""
+        if "$" in statement:
+            parameterString = statement[statement.find("$") + 1:-1]
+            if "," in parameterString:
+                parameters = tuple(parameterString.split(","))
+                print tuple(parameters)
+                outputFile.append(row[1].format(*parameters) + option)
+            else:
+                outputFile.append(row[1].format(parameterString) + option)
+        else:
+            outputFile.append(row[1] + option)
+
     def getRelevantData(self, uniFile, comparisonFile, outputType):
         relevantData = []
         for row in comparisonFile:
@@ -41,11 +54,12 @@ class FileManipulator():
             outputFile.append("\n")
             for keyword in line:
                 for row in relevantData:
-                    if keyword == row[0]:
+                    if keyword == row[0] or keyword[:keyword.find("(") - 1] == row[0][:keyword.find("(") - 1]:
+                        
                         if keyword == line[len(line) - 1]:
-                            outputFile.append(row[1])
+                            self.processParameters(keyword, row, outputFile)
                         else:
-                            outputFile.append(row[1] + " ")
+                            self.processParameters(keyword, row, outputFile, " ")
         del outputFile[0]
         return outputFile
         

@@ -1,2 +1,7 @@
-test test2
-test3
+class($tester)
+tab method($testMethod,param1)
+tab tab infinite_while
+tab tab tab increment($1)
+tab tab end
+tab end
+end
