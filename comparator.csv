@@ -1,0 +1,4 @@
+output_type,keyword,output
+js,test,if (true)
+js,test2,while (false)
+js,test3,i++
