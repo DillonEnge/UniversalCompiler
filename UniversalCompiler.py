@@ -36,12 +36,19 @@ class FileManipulator():
             parameterString = statement[statement.find("$") + 1:-1]
             if "," in parameterString:
                 parameters = tuple(parameterString.split(","))
-                print tuple(parameters)
+                if "{{*}}" in row[1]:
+                    self.generateInfiniteBrackets(parameters, row)
                 outputFile.append(row[1].format(*parameters) + option)
             else:
                 outputFile.append(row[1].format(parameterString) + option)
         else:
             outputFile.append(row[1] + option)
+
+    def generateInfiniteBrackets(self, parameters, row):
+        bracketString = ""
+        for parameter in parameters:
+            bracketString += "{},"
+        row[1] = row[1].replace("{{*}}", bracketString[3:len(bracketString) - 1])
 
     def getRelevantData(self, uniFile, comparisonFile, outputType):
         relevantData = []
@@ -55,7 +62,6 @@ class FileManipulator():
             for keyword in line:
                 for row in relevantData:
                     if keyword == row[0] or keyword[:keyword.find("(") - 1] == row[0][:keyword.find("(") - 1]:
-                        
                         if keyword == line[len(line) - 1]:
                             self.processParameters(keyword, row, outputFile)
                         else:

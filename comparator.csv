@@ -1,13 +1,23 @@
 output_type,keyword,output
 js,class($),class {} {{
 py,class($),class {}():
-js,method($),func {}({}) {{
-py,method($),def {}({}):
-js,tab,   
-py,tab,   
-js,infinite_while,while (true) {
-py,infinite_while,while (True):
+js,method($),{}({{*}}) {{
+py,method($),def {}({{*}}):
+js,>,   
+py,>,   
+js,if($),if ({}) {{
+py,if($),if {}:
+js,while($),while ({}) {{
+py,while($),while {}:
+js,return($),return {};
+py,return($),return {}
 js,end,}
 py,end,
-js,increment($),i += {};
-py,increment($),i += {}
+js,variable($),let {} = {};
+py,variable($),{} = {}
+js,create($),let {} = new {}();
+py,create($),{} = {}();
+js,invoke($),{}.{}({{*}});
+py,invoke($),{}.{}({{*}})
+js,array($),{} = [];
+py,array($),{} = []

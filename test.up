@@ -1,7 +1,6 @@
-class($tester)
-tab method($testMethod,param1)
-tab tab infinite_while
-tab tab tab increment($1)
-tab tab end
-tab end
+class($Tester)
+> method($sum,param1,param2)
+> > variable($sum,param1+param2)
+> > return($sum)
+> end
 end
